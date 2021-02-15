@@ -13,13 +13,13 @@ class Titles(models.Model):
         null=False,
     )
     year = models.PositiveIntegerField(
-        max_length=4,
         blank=True,
         null=True,
         validators=[MaxValueValidator(dt.datetime.now().year+1)]
     )
     category = models.ForeignKey(
         Categories,
-        on_delete=models.SET_NULL(),
-        related_name='titles'
+        on_delete=models.SET_NULL,
+        related_name='titles',
+        null=True
     )
