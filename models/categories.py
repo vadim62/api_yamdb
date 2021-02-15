@@ -19,4 +19,4 @@ class Categories(models.Model):
         super(Categories, self).save(*args, **kwargs)
 
     def __str__(self):
-        return f'"{self.title}"'
+        return f'"{self.name}"'
