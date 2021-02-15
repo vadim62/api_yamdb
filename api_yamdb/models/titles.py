@@ -17,9 +17,8 @@ class Titles(models.Model):
         null=True,
         validators=[MaxValueValidator(dt.datetime.now().year+1)]
     )
-    category = models.ForeignKey(
+    category = models.ManyToManyField(
         Categories,
-        on_delete=models.SET_NULL,
         related_name='titles',
-        null=True
+        null=True,
     )
