@@ -3,6 +3,7 @@ import datetime as dt
 from django.core.validators import MaxValueValidator
 from django.db import models
 
+from .genres import Genres
 from .categories import Categories
 
 
@@ -17,8 +18,18 @@ class Titles(models.Model):
         null=True,
         validators=[MaxValueValidator(dt.datetime.now().year+1)]
     )
-    category = models.ManyToManyField(
+    category = models.ForeignKey(
         Categories,
+        on_delete=models.SET_NULL,
         related_name='titles',
         null=True,
+    )
+    description = models.CharField(
+        max_length=200,
+        blank=True,
+    )
+    genre = models.ManyToManyField(
+        Genres,
+        related_name='titles',
+        blank=True,
     )
