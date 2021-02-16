@@ -7,7 +7,7 @@ from rest_framework.response import Response
 
 from api_yamdb import serializers
 from api_yamdb.models import Categories
-from api_yamdb.pagination import CategoriesPagination
+from api_yamdb.pagination import YamPagination
 
 
 class CategoriesViewSet(
@@ -16,7 +16,7 @@ class CategoriesViewSet(
     ListModelMixin,
     DestroyModelMixin
 ):
-    pagination_class = CategoriesPagination
+    pagination_class = YamPagination
     queryset = Categories.objects.all()
     serializer_class = serializers.CategoriesSerializer
     filterset_fields = ['name', ]
