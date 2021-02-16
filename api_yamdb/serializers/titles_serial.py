@@ -7,5 +7,5 @@ class TitlesSerializer(serializers.ModelSerializer):
     # category = serializers.SlugRelatedField(many=True, queryset=Categories.objects, slug_field='id')
 
     class Meta:
-        fields = '__all__'
+        exclude = ['id', ]
         model = Titles
