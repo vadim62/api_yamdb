@@ -33,3 +33,4 @@ class Titles(models.Model):
         related_name='titles',
         blank=True,
     )
+
