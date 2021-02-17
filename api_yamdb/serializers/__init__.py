@@ -1,0 +1,3 @@
+from .titles_serial import TitlesSerializer
+from .categories_serial import CategoriesSerializer
+from.genres_serial import GenresSerializer
