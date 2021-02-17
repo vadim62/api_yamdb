@@ -12,8 +12,8 @@ class Genres(models.Model):
         unique=True
     )
 
-    def __str__(self):
-        return f'{self.slug}'
+    # def __str__(self):
+    #     return self.slug
 
     class Meta:
         ordering = ['id']

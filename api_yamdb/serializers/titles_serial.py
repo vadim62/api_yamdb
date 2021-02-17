@@ -1,16 +1,15 @@
 from rest_framework import serializers
 
-from api_yamdb.models import Categories, Genres, Titles
-
-
-class GenreSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Genres
-        fields = ['slug']
+from api_yamdb.models import Genres, Titles
 
 
 class TitlesSerializer(serializers.ModelSerializer):
-    genre = GenreSerializer(many=True)
+    genre = serializers.SlugRelatedField(
+        many=True,
+        slug_field='slug',
+        queryset=Genres.objects.all(),
+        required=False,
+    ),
 
     class Meta:
         exclude = ['id', ]
