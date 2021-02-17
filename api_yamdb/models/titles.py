@@ -12,6 +12,7 @@ class Titles(models.Model):
         max_length=200,
         blank=False,
         null=False,
+        unique=True
     )
     year = models.PositiveIntegerField(
         blank=True,
@@ -34,3 +35,5 @@ class Titles(models.Model):
         blank=True,
     )
 
+    class Meta:
+        ordering = ['id']

@@ -1,1 +1,1 @@
-from .category_pagination import CategoriesPagination
+from .pagination import YamPagination
