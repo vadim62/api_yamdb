@@ -9,7 +9,7 @@ v1_router = DefaultRouter()
 v1_router.register(
     'titles',
     TitlesViewSet,
-    basename='titles'
+    basename='titles',
 )
 v1_router.register(
     'categories',
@@ -21,9 +21,6 @@ v1_router.register(
     GenresViewSet,
     basename='genres'
 )
-
-
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),

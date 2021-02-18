@@ -24,6 +24,7 @@ class Titles(models.Model):
         on_delete=models.SET_NULL,
         related_name='titles',
         null=True,
+        blank=True,
     )
     description = models.CharField(
         max_length=200,
@@ -31,7 +32,6 @@ class Titles(models.Model):
     )
     genre = models.ManyToManyField(
         Genres,
-        related_name='titles',
         blank=True,
     )
 
