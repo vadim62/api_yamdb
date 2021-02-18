@@ -5,5 +5,5 @@ from api_yamdb.models import Genres
 
 class GenresSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = '__all__'
+        fields = ('slug',)
         model = Genres
