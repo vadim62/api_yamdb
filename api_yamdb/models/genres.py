@@ -9,11 +9,13 @@ class Genres(models.Model):
         max_length=50,
         blank=False,
         null=False,
-        unique=True
+        unique=True,
+        db_index=True,
+        primary_key=True
     )
 
     def __str__(self):
         return self.slug
 
     class Meta:
-        ordering = ['id']
+        ordering = ['slug']

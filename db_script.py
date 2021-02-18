@@ -3,7 +3,7 @@ import sqlite3
 
 con = sqlite3.connect("db.sqlite3")
 curs = con.cursor()
-curs.execute("drop table api_yamdb_genres;")
+# curs.execute("drop table api_yamdb_genres;")
 curs.execute(
     "create table api_yamdb_genres("
     "id integer "

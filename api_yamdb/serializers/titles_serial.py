@@ -9,12 +9,13 @@ class TitlesSerializer(serializers.ModelSerializer):
     genre = serializers.SlugRelatedField(
         queryset=Genres.objects.all(),
         slug_field='slug',
-        required=False,
         many=True,
+        required=False,
+        allow_empty=True
     ),
-    id = serializers.PrimaryKeyRelatedField(
-        read_only=True
-    )
+    # id = serializers.PrimaryKeyRelatedField(
+    #     read_only=True
+    # )
     category = serializers.SlugRelatedField(
         queryset=Categories.objects.all(),
         slug_field='slug',
