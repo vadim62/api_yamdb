@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
 from api_yamdb.models import Categories, Genres, Titles
-from . import CategoriesSerializer
-from . import GenresSerializer
+# from . import CategoriesSerializer
+# from . import GenresSerializer
 
 
 class TitlesSerializer(serializers.ModelSerializer):
@@ -26,10 +26,10 @@ class TitlesSerializer(serializers.ModelSerializer):
         model = Titles
 
 
-class TitleReadSerializer(serializers.ModelSerializer):
-    genre = GenresSerializer(many=True)
-    category = CategoriesSerializer(required=False)
-
-    class Meta:
-        fields = '__all__'
-        model = Titles
+# class TitleReadSerializer(serializers.ModelSerializer):
+#     genre = GenresSerializer(many=True)
+#     category = CategoriesSerializer(required=False)
+#
+#     class Meta:
+#         fields = '__all__'
+#         model = Titles
