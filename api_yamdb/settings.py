@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'django_filters', 
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +125,24 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'),)
+
+REST_FRAMEWORK = {        
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            'rest_framework.authentication.BasicAuthentication'
+        ],
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            'rest_framework_simplejwt.authentication.JWTAuthentication',
+        ],
+        'DEFAULT_FILTER_BACKENDS': [
+            'django_filters.rest_framework.DjangoFilterBackend',
+        ],
+        'PAGE_SIZE': 100
+}
+
+AUTH_USER_MODEL = 'api.MyUser'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ne4istii1@gmail.com'
+EMAIL_HOST_PASSWORD = 'n49Ma3yxT5'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
