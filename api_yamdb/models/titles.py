@@ -14,7 +14,7 @@ class Titles(models.Model):
         null=False,
         unique=True
     )
-    year = models.PositiveIntegerField(
+    year = models.IntegerField(
         blank=True,
         null=True,
         validators=[MaxValueValidator(dt.datetime.now().year+1)]

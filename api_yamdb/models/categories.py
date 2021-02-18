@@ -9,6 +9,7 @@ class Categories(models.Model):
         max_length=50,
         null=False,
         unique=True,
+        primary_key=True
     )
 
     def __str__(self):
