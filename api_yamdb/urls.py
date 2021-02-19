@@ -18,7 +18,7 @@ v1_router.register(
 v1_router.register(
     'titles',
     TitlesViewSet,
-    basename='titles'
+    basename='titles',
 )
 v1_router.register(
     'categories',

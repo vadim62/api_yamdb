@@ -10,12 +10,13 @@ class Genres(models.Model):
         max_length=50,
         blank=False,
         null=False,
-        unique=True
+        unique=True,
+        db_index=True,
+        primary_key=True
     )
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Genres, self).save(*args, **kwargs)
-
     def __str__(self):
-        return f'"{self.name}"'
+        return self.slug
+
+    class Meta:
+        ordering = ['slug']
