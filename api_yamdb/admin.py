@@ -12,11 +12,11 @@ User = get_user_model()
 
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(
-        label='Password',
+        label='Password', 
         widget=forms.PasswordInput
     )
     password2 = forms.CharField(
-        label='Password confirmation',
+        label='Password confirmation', 
         widget=forms.PasswordInput
     )
 

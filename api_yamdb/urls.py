@@ -4,7 +4,9 @@ from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 
 from api_yamdb.views import (CategoriesViewSet, GenresViewSet, TitlesViewSet,
-                             ReviewViewSet, CommentsViewSet, RegisterUserView, UsersViewSet, MyTokenObtainPairView)
+                             ReviewViewSet, CommentsViewSet, RegisterUserView,
+                             UsersViewSet, MyTokenObtainPairView)
+
 
 v1_router = DefaultRouter()
 v1_router.register(
