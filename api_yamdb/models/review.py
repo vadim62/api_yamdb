@@ -1,7 +1,6 @@
 from django.core.validators import MaxValueValidator
 from django.db import models
 
-from .genres import Genres
 from .titles import Titles
 from .user import User
 

@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -76,15 +76,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'api_yamdb.wsgi.application'
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': [
-        'rest_framework.pagination.PageNumberPagination',
-    ],
-    'PAGE_SIZE': 5,
-    'DEFAULT_FILTER_BACKENDS': [
-            'django_filters.rest_framework.DjangoFilterBackend'
-    ]
-}
+
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -139,15 +131,17 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'),)
 
 REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': [
-            'rest_framework.authentication.BasicAuthentication'
+            'rest_framework.authentication.BasicAuthentication',
+            'rest_framework_simplejwt.authentication.JWTAuthentication'
         ],
-        'DEFAULT_AUTHENTICATION_CLASSES': [
-            'rest_framework_simplejwt.authentication.JWTAuthentication',
-        ],
+
         'DEFAULT_FILTER_BACKENDS': [
             'django_filters.rest_framework.DjangoFilterBackend',
         ],
-        'PAGE_SIZE': 100
+        'DEFAULT_PAGINATION_CLASS': [
+            'rest_framework.pagination.PageNumberPagination',
+    ],
+        'PAGE_SIZE': 5,
 }
 
 AUTH_USER_MODEL = 'api_yamdb.MyUser'
