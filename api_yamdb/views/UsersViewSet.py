@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import ModelViewSet
 
-from api_yamdb.permissions import UsersPermissions
+from api_yamdb.permissions import permissions
 from api_yamdb import serializers
 
 
@@ -17,7 +17,7 @@ class UsersViewSet(ModelViewSet):
     serializer_class = serializers.UsersSerializer
     permission_classes = (
         IsAuthenticated,
-        UsersPermissions,
+        permissions.UsersPermissions,
    )
     pagination_class = PageNumberPagination
     # filter_backends = (DjangoFilterBackend,)
