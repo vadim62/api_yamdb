@@ -9,8 +9,8 @@ User = get_user_model()
 class UsersPermissions (BasePermission):
 
     def has_permission(self, request, view):
-        if request.user.is_admin == True:
-            return True
+        if request.user.is_staff == True or request.user.role == 'admin':
+            return True   
         if (request.method == 'GET' and 
             view.action == 'list' and 
             request.user.role in ['user', 'moderator']
@@ -23,7 +23,7 @@ class UsersPermissions (BasePermission):
         return True
         
     def has_object_permission(self, request, view, obj):
-        if request.user.is_admin == True or request.user.role == 'admin':
+        if request.user.is_staff == True or request.user.role == 'admin':
             return True       
         is_me = (
             request.user.pk == request.parser_context.get('kwargs').get('pk')
@@ -42,7 +42,7 @@ class CategoriesGenresPermissions (BasePermission):
             return True
         if request.method in ['POST', 'DELETE'] and (
             request.auth is not None and (
-            request.user.is_admin == True or 
+            request.user.is_staff == True or 
             request.user.role == 'admin')):
             return True
         return False

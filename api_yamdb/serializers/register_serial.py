@@ -12,13 +12,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         validators=[
             UniqueValidator(
                 queryset=User.objects.all(),
-                message='Такой пользователь уже существует!'
+                message='Пользователь с таким email уже существует!'
             ),
         ]
     )
 
     class Meta:
         model = User
-        fields = (
-            'email',
-        )
+        fields = ('email',)
