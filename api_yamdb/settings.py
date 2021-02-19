@@ -150,7 +150,7 @@ REST_FRAMEWORK = {
         'PAGE_SIZE': 100
 }
 
-AUTH_USER_MODEL = 'api_yamdb.MyUser'
+# AUTH_USER_MODEL = 'api_yamdb.MyUser'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'ne4istii1@gmail.com'
