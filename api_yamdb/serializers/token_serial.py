@@ -11,4 +11,3 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         attrs.update({'password': self.confirmation_code})
         return super().validate(attrs)
-    

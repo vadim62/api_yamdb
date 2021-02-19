@@ -35,4 +35,3 @@ class RegisterUserView(ModelViewSet):
         user.save()
         # отправляем confirmation_code на почту пользователя
         self.send_confirmation_code(email, confirmation_code)
-        

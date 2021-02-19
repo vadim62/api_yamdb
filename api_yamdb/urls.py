@@ -3,9 +3,10 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 
-from api_yamdb.views import (
-    RegisterUserView, UsersViewSet, MyTokenObtainPairView
-)
+from api_yamdb.views import (CategoriesViewSet, GenresViewSet, TitlesViewSet,
+                             ReviewViewSet, CommentsViewSet, RegisterUserView,
+                             UsersViewSet, MyTokenObtainPairView)
+
 
 v1_router = DefaultRouter()
 v1_router.register(
@@ -13,10 +14,44 @@ v1_router.register(
     RegisterUserView
 )
 v1_router.register(
-    'users',
+    r'users',
     UsersViewSet
 )
-
+v1_router.register(
+    'titles',
+    TitlesViewSet,
+    basename='titles',
+)
+v1_router.register(
+    'categories',
+    CategoriesViewSet,
+    basename='categories'
+)
+v1_router.register(
+    'genres',
+    GenresViewSet,
+    basename='genres'
+)
+v1_router.register(
+    r'titles/(?P<title_id>\d+)/reviews',
+    ReviewViewSet,
+    basename='reviews'
+)
+v1_router.register(
+    r'titles/(?P<title_id>\d+)/reviews/(?P<review_id>\d+)',
+    ReviewViewSet,
+    basename='review'
+)
+v1_router.register(
+    r'titles/(?P<title_id>\d+)/reviews/(?P<review_id>\d+)/comments',
+    CommentsViewSet,
+    basename='comments'
+)
+v1_router.register(
+    r'titles/(?P<title_id>\d+)/reviews/(?P<review_id>\d+)/comments/(?P<comment_id>\d+)',
+    CommentsViewSet,
+    basename='comment'
+)
 
 
 urlpatterns = [
