@@ -1,7 +1,7 @@
 from django.db import models
 
 from .review import Review
-from .user import User
+from .users import MyUser
 from .titles import Titles
 
 
@@ -15,7 +15,7 @@ class Comments(models.Model):
         max_length=300
     )
     author = models.ForeignKey(
-        User,
+        MyUser,
         on_delete=models.CASCADE,
         related_name='comments')
     pub_date = models.DateTimeField(

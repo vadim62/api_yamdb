@@ -1,9 +1,8 @@
 from django.core.validators import MaxValueValidator
 from django.db import models
 
-from .genres import Genres
 from .titles import Titles
-from .user import User
+from .users import MyUser
 
 
 class Review(models.Model):
@@ -19,7 +18,7 @@ class Review(models.Model):
         max_length=300
     )
     author = models.ForeignKey(
-        User,
+        MyUser,
         on_delete=models.CASCADE,
         related_name='reviews')
     pub_date = models.DateTimeField(
