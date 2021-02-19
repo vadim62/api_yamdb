@@ -1,2 +1,7 @@
-from .permissions import (UsersPermissions, CategoriesPermissions,
-                          CommentsPermissions, ReviewsPermissions, GenresPermissions, TitlesPermissions)
+from .permissions import (
+    UsersPermissions, 
+    CategoriesGenresPermissions,
+    CommentsPermissions, 
+    ReviewsPermissions, 
+    TitlesPermissions
+)

@@ -3,17 +3,18 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 
 from rest_framework.permissions import AllowAny
-
 from rest_framework.viewsets import ModelViewSet
 
 from api_yamdb import settings
-from api_yamdb import serializers
+from api_yamdb.serializers import RegisterSerializer
+
 
 User = get_user_model()
 
+
 class RegisterUserView(ModelViewSet):
     queryset = User.objects.all()
-    serializer_class = serializers.RegisterSerializer
+    serializer_class = RegisterSerializer
     permission_classes = (AllowAny,)
 
     def send_confirmation_code(self, email, token):
