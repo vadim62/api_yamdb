@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'django_filters', 
-    'api',
+    'api_yamdb',
 ]
 
 MIDDLEWARE = [
@@ -139,7 +139,7 @@ REST_FRAMEWORK = {
         'PAGE_SIZE': 100
 }
 
-AUTH_USER_MODEL = 'api.MyUser'
+AUTH_USER_MODEL = 'api_yamdb.MyUser'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'ne4istii1@gmail.com'
