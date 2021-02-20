@@ -6,17 +6,18 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 
+from .models import Title
 
 User = get_user_model()
 
 
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(
-        label='Password', 
+        label='Password',
         widget=forms.PasswordInput
     )
     password2 = forms.CharField(
-        label='Password confirmation', 
+        label='Password confirmation',
         widget=forms.PasswordInput
     )
 
@@ -58,6 +59,7 @@ class UserChangeForm(forms.ModelForm):
             user_permissions.queryset = (
                 user_permissions.queryset.select_related('content_type')
             )
+
     def clean_password(self):
         return self.initial.get('password')
 
@@ -89,6 +91,14 @@ class UserAdmin(BaseUserAdmin):
     empty_value_display = '-пусто-'
     filter_horizontal = ()
 
+
+class TitlesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'category')
+    search_fields = ('name',)
+    list_filter = ('id',)
+
+
+admin.site.register(Title, TitlesAdmin)
 
 admin.site.register(User, UserAdmin)
 admin.site.unregister(Group)

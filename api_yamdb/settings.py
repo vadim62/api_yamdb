@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
-    'django_filters', 
+    'django_filters',
     'api_yamdb',
 ]
 
@@ -73,8 +73,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'api_yamdb.wsgi.application'
-
-
 
 
 # Database
@@ -129,24 +127,28 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'),)
 
 REST_FRAMEWORK = {
-        'DEFAULT_AUTHENTICATION_CLASSES': [
-            'rest_framework.authentication.BasicAuthentication',
-            'rest_framework_simplejwt.authentication.JWTAuthentication'
-        ],
-
-        'DEFAULT_FILTER_BACKENDS': [
-            'django_filters.rest_framework.DjangoFilterBackend',
-        ],
-        'DEFAULT_PAGINATION_CLASS': [
-            'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
     ],
-        'PAGE_SIZE': 5,
+
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ],
+    'DEFAULT_PAGINATION_CLASS': [
+        'rest_framework.pagination.PageNumberPagination',
+    ],
+    'PAGE_SIZE': 100,
 }
 
 AUTH_USER_MODEL = 'api_yamdb.MyUser'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ne4istii1@gmail.com'
-EMAIL_HOST_PASSWORD = 'n49Ma3yxT5'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+#  подключаем движок filebased.EmailBackend
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+
+# указываем директорию, в которую будут складываться файлы писем
+
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+
+EMAIL_HOST_USER = 'no-reply-confirmation@code.com'

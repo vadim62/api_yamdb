@@ -1,13 +1,13 @@
 from rest_framework import serializers
 
-from api_yamdb.models import Categories, Genres, Titles
-from . import CategoriesSerializer
-from . import GenresSerializer
+from api_yamdb.models import Category, Genre, Title
+
+from . import CategoriesSerializer, GenresSerializer
 
 
 class TitlesSerializer(serializers.ModelSerializer):
     genre = serializers.SlugRelatedField(
-        queryset=Genres.objects.all(),
+        queryset=Genre.objects.all(),
         slug_field='slug',
         many=True,
         required=False,
@@ -15,20 +15,21 @@ class TitlesSerializer(serializers.ModelSerializer):
     ),
 
     category = serializers.SlugRelatedField(
-        queryset=Categories.objects.all(),
+        queryset=Category.objects.all(),
         slug_field='slug',
         required=False,
     )
 
     class Meta:
         fields = '__all__'
-        model = Titles
+        model = Title
 
 
 class TitleReadSerializer(serializers.ModelSerializer):
     genre = GenresSerializer(many=True)
     category = CategoriesSerializer(required=False)
+    rating = serializers.IntegerField(read_only=True)
 
     class Meta:
         fields = '__all__'
-        model = Titles
+        model = Title
