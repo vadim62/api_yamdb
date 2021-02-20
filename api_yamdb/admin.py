@@ -46,7 +46,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password', 'username', 'is_active', 'is_admin')
+        fields = ('email', 'password', 'username',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -65,17 +65,17 @@ class UserChangeForm(forms.ModelForm):
 class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
-    list_display = ('email', 'username', 'is_admin')
-    list_filter = ('email', 'username')
+    list_display = ('email', 'username',)
+    list_filter = ('email', 'username',)
     fieldsets = (
         (None, {'fields': (
             'username', 'email', 'password'
         )}),
         ('Information', {'fields': (
-            'first_name', 'last_name', 'bio', 'role'
+            'first_name', 'last_name', 'bio',
         )}),
         ('Permissions', {'fields': (
-            'is_admin',
+            'role',
         )}),
     )
     add_fieldsets = (
