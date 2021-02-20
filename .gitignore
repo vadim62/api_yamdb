@@ -16,3 +16,4 @@ __pycache__/
 
 migrations/
 db.sqlite3
+sent_emails/

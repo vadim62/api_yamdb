@@ -145,8 +145,12 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'api_yamdb.MyUser'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ne4istii1@gmail.com'
-EMAIL_HOST_PASSWORD = 'n49Ma3yxT5'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+#  подключаем движок filebased.EmailBackend 
+ 
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend" 
+ 
+# указываем директорию, в которую будут складываться файлы писем 
+ 
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")  
+
+EMAIL_HOST_USER = 'no-reply-confirmation@code.com'
