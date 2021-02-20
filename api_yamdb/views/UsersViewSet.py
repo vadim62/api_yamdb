@@ -1,13 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 
-from django_filters.rest_framework import DjangoFilterBackend
-
-from rest_framework.permissions import IsAuthenticated 
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated 
 from rest_framework.viewsets import ModelViewSet
 
-from api_yamdb import settings
 from api_yamdb.serializers import UsersSerializer
 from api_yamdb.permissions.permissions import UsersPermissions
 
@@ -22,9 +19,7 @@ class UsersViewSet(ModelViewSet):
         IsAuthenticated, 
         UsersPermissions,
    )
-    pagination_class = PageNumberPagination
-    # filter_backends = (DjangoFilterBackend,)
-    # filterset_class = UsersFilter    
+    pagination_class = PageNumberPagination  
 
     def get_object(self):
         username = self.kwargs['pk']

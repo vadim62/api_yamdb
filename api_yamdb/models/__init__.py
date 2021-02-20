@@ -3,4 +3,4 @@ from .titles import Titles
 from .genres import Genres
 from .review import Review
 from .comments import Comments
-from .users import CustomUserManager, MyUser
+from .users import MyUser
