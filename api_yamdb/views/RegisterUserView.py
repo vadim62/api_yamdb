@@ -21,11 +21,9 @@ class RegisterUserView(ModelViewSet):
         send_mail(subject, message, from_email, [email, ])
 
     def perform_create(self, serializer):
-        email = serializer.validated_data.get('email')
-        # заполняем username (из email)
-        username = email.split('@')[0]
+        email = serializer.validated_data.get('email')          
         # создаем пользователя без пароля
-        user = User.objects.create(email=email, username=username)
+        user, created = User.objects.get_or_create(email=email)
         # создаем confirmation_code, он же - пароль для пользователя
         confirmation_code = default_token_generator.make_token(user)
         # устанавливаем хэш-пароль для пользователя

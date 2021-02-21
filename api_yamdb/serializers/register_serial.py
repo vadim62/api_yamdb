@@ -6,14 +6,7 @@ User = get_user_model()
 
 
 class RegisterSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(
-        validators=[
-            UniqueValidator(
-                queryset=User.objects.all(),
-                message='Пользователь с таким email уже существует!'
-            ),
-        ]
-    )
+    email = serializers.EmailField()
 
     class Meta:
         model = User
