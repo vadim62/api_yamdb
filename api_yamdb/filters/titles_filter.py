@@ -1,14 +1,14 @@
 import django_filters
 
-from api_yamdb.models import Titles
+from api_yamdb.models import Title
 
 
 class TitlesFilter(django_filters.FilterSet):
     genre__slug = django_filters.CharFilter(lookup_expr='iexact')
     category__slug = django_filters.CharFilter()
     year = django_filters.NumberFilter()
-    name = django_filters.CharFilter(lookup_expr='iexact')
+    name = django_filters.CharFilter(lookup_expr='icontains')
 
     class Meta:
-        model = Titles
+        model = Title
         fields = '__all__'

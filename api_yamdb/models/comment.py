@@ -1,12 +1,13 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 from .review import Review
-from .users import MyUser
-from .titles import Titles
+
+User = get_user_model()
 
 
-class Comments(models.Model):
-    review_id = models.ForeignKey(
+class Comment(models.Model):
+    review = models.ForeignKey(
         Review,
         on_delete=models.CASCADE,
         related_name='comments'
@@ -15,9 +16,10 @@ class Comments(models.Model):
         max_length=300
     )
     author = models.ForeignKey(
-        MyUser,
+        User,
         on_delete=models.CASCADE,
-        related_name='comments')
+        related_name='comments'
+    )
     pub_date = models.DateTimeField(
         'Дата публикации',
         auto_now_add=True
@@ -25,6 +27,3 @@ class Comments(models.Model):
 
     def __str__(self):
         return f'"{self.text}"'
-
-    class Meta:
-        ordering = ['id']

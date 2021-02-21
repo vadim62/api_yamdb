@@ -1,8 +1,7 @@
 from django.db import models
-from django.template.defaultfilters import slugify
 
 
-class Genres(models.Model):
+class Genre(models.Model):
     name = models.CharField(
         max_length=50,
     )

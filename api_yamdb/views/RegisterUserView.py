@@ -1,13 +1,10 @@
+from api_yamdb import settings
+from api_yamdb.serializers import RegisterSerializer
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
-
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ModelViewSet
-
-from api_yamdb import settings
-from api_yamdb.serializers import RegisterSerializer
-
 
 User = get_user_model()
 
@@ -21,7 +18,7 @@ class RegisterUserView(ModelViewSet):
         subject = 'Confirmation code'
         message = f'Confirmation code: {token}'
         from_email = settings.EMAIL_HOST_USER
-        send_mail(subject, message, from_email, [email,])
+        send_mail(subject, message, from_email, [email, ])
 
     def perform_create(self, serializer):
         email = serializer.validated_data.get('email')          
