@@ -14,7 +14,8 @@ from rest_framework.permissions import SAFE_METHODS
 
 class TitlesViewSet(viewsets.ModelViewSet):
     queryset = Title.objects.annotate(
-        rating=Avg('reviews__score'))
+        rating=Avg('reviews__score')
+    ).order_by('id')
     permission_classes = [TitlesPermissions]
     pagination_class = YamPagination
     serializer_class = serializers.TitlesSerializer
