@@ -112,10 +112,15 @@ AUTH_USER_MODEL = 'api_yamdb.MyUser'
 
 #  подключаем движок filebased.EmailBackend
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
 # указываем директорию, в которую будут складываться файлы писем
 
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 
 EMAIL_HOST_USER = 'no-reply-confirmation@code.com'
+
+SWAGGER_SETTINGS = {
+    'DEFAULT_INFO': 'api_yamdb.views.info',
+    'DEFAULT_API_URL': 'http://localhost:5000/api/v1/'
+}
