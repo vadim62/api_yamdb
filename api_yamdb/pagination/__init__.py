@@ -1,1 +1,1 @@
-from .pagination import YamPagination # noqa:f401
+from .pagination import YamPagination  # noqa:f401
