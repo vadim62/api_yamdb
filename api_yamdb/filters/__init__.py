@@ -1,1 +1,1 @@
-from .titles_filter import TitlesFilter
+from .titles_filter import TitlesFilter # noqa

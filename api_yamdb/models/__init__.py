@@ -1,6 +1,6 @@
-from .category import Category
-from .comment import Comment
-from .genre import Genre
-from .review import Review
-from .title import Title
-from .users import MyUser
+from .category import Category # noqa
+from .comment import Comment # noqa
+from .genre import Genre # noqa
+from .review import Review # noqa
+from .title import Title # noqa
+from .users import MyUser # noqa
