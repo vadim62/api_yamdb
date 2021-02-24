@@ -1,8 +1,8 @@
-from .CatViewSet import CategoriesViewSet # noqa
-from .CommentViewSet import CommentViewSet # noqa
-from .GenresViewSet import GenresViewSet # noqa
-from .RegisterUserView import RegisterUserView # noqa
-from .ReviewViewSet import ReviewViewSet # noqa
-from .TtilesViewSet import TitlesViewSet # noqa
-from .UsersViewSet import UsersViewSet # noqa
-from .swagger import schema_view, info # noqa
+from .CatViewSet import CategoriesViewSet # noqa: f401
+from .CommentViewSet import CommentViewSet # noqa: f401
+from .GenresViewSet import GenresViewSet # noqa: f401
+from .RegisterUserView import RegisterUserView # noqa: f401
+from .ReviewViewSet import ReviewViewSet # noqa: f401
+from .TtilesViewSet import TitlesViewSet # noqa: f401
+from .UsersViewSet import UsersViewSet # noqa: f401
+from .swagger import schema_view, info # noqa: f401

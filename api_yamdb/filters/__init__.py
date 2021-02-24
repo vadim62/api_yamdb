@@ -1,1 +1,1 @@
-from .titles_filter import TitlesFilter # noqa
+from .titles_filter import TitlesFilter # noqa: f401

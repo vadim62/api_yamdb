@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from api_yamdb.models import Category, Genre, Title # noqa
+from api_yamdb.models import Category, Genre, Title # noqa: f401
 
 from . import CategoriesSerializer, GenresSerializer
 
