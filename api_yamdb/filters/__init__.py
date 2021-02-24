@@ -1,1 +1,3 @@
-from .titles_filter import TitlesFilter  # noqa: f401
+from .titles_filter import TitlesFilter
+
+__all__ = ['TitlesFilter']

@@ -1,8 +1,20 @@
-from .categories_serial import CategoriesSerializer  # noqa: f401
-from .comment_serial import CommentSerializer  # noqa: f401
-from .genres_serial import GenresSerializer  # noqa: f401
-from .register_serial import RegisterSerializer  # noqa: f401
-from .review_serial import ReviewSerializer  # noqa: f401
-from .titles_serial import TitleReadSerializer, TitlesSerializer  # noqa: f401
-from .token_serial import MyTokenObtainPairSerializer  # noqa: f401
-from .users_serial import UsersSerializer  # noqa: f401
+from .categories_serial import CategoriesSerializer
+from .comment_serial import CommentSerializer
+from .genres_serial import GenresSerializer
+from .register_serial import RegisterSerializer
+from .review_serial import ReviewSerializer
+from .titles_serial import TitleReadSerializer, TitlesSerializer
+from .token_serial import MyTokenObtainPairSerializer
+from .users_serial import UsersSerializer
+
+__all__ = [
+    'CategoriesSerializer',
+    'CommentSerializer',
+    'GenresSerializer',
+    'RegisterSerializer',
+    'ReviewSerializer',
+    'TitleReadSerializer',
+    'TitlesSerializer',
+    'MyTokenObtainPairSerializer',
+    'UsersSerializer',
+]

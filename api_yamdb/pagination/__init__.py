@@ -1,1 +1,5 @@
-from .pagination import YamPagination  # noqa:f401
+from .pagination import YamPagination
+
+__all__ = [
+    'YamPagination',
+]

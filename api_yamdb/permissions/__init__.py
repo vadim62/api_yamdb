@@ -1,3 +1,11 @@
 from .permissions import (CategoriesGenresPermissions, CommentPermissions,
                           ReviewPermissions, TitlesPermissions,
-                          UsersPermissions)  # noqa:f401
+                          UsersPermissions)
+
+__all__ = [
+    'CategoriesGenresPermissions',
+    'CommentPermissions',
+    'ReviewPermissions',
+    'TitlesPermissions',
+    'UsersPermissions',
+]

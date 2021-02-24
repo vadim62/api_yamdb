@@ -1,8 +1,20 @@
-from .CatViewSet import CategoriesViewSet  # noqa: f401
-from .CommentViewSet import CommentViewSet  # noqa: f401
-from .GenresViewSet import GenresViewSet  # noqa: f401
-from .RegisterUserView import RegisterUserView  # noqa: f401
-from .ReviewViewSet import ReviewViewSet  # noqa: f401
-from .TtilesViewSet import TitlesViewSet  # noqa: f401
-from .UsersViewSet import UsersViewSet  # noqa: f401
-from .swagger import schema_view, info  # noqa: f401
+from .CatViewSet import CategoriesViewSet
+from .CommentViewSet import CommentViewSet
+from .GenresViewSet import GenresViewSet
+from .RegisterUserView import RegisterUserView
+from .ReviewViewSet import ReviewViewSet
+from .TtilesViewSet import TitlesViewSet
+from .UsersViewSet import UsersViewSet
+from .swagger import schema_view, info
+
+__all__ = [
+    'CategoriesViewSet',
+    'CommentViewSet',
+    'GenresViewSet',
+    'RegisterUserView',
+    'ReviewViewSet',
+    'TitlesViewSet',
+    'UsersViewSet',
+    'schema_view',
+    'info',
+]
