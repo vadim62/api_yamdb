@@ -3,34 +3,37 @@ import datetime as dt
 from django.core.validators import MaxValueValidator
 from django.db import models
 
-from .genres import Genres
-from .categories import Categories
+from .category import Category
+from .genre import Genre
 
 
-class Titles(models.Model):
+class Title(models.Model):
     name = models.CharField(
         max_length=200,
         blank=False,
         null=False,
+        unique=True
     )
-    year = models.PositiveIntegerField(
+    year = models.IntegerField(
         blank=True,
         null=True,
-        validators=[MaxValueValidator(dt.datetime.now().year+1)]
+        validators=[MaxValueValidator(dt.datetime.now().year + 1)]
     )
     category = models.ForeignKey(
-        Categories,
+        Category,
         on_delete=models.SET_NULL,
         related_name='titles',
         null=True,
+        blank=True,
     )
     description = models.CharField(
         max_length=200,
         blank=True,
     )
     genre = models.ManyToManyField(
-        Genres,
-        related_name='titles',
+        Genre,
         blank=True,
     )
 
+    class Meta:
+        ordering = ['id']

@@ -1,3 +1,8 @@
-from .titles_serial import TitlesSerializer
 from .categories_serial import CategoriesSerializer
-from.genres_serial import GenresSerializer
+from .comment_serial import CommentSerializer
+from .genres_serial import GenresSerializer
+from .register_serial import RegisterSerializer
+from .review_serial import ReviewSerializer
+from .titles_serial import TitleReadSerializer, TitlesSerializer
+from .token_serial import MyTokenObtainPairSerializer
+from .users_serial import UsersSerializer
