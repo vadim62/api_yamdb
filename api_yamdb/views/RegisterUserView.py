@@ -22,7 +22,7 @@ class RegisterUserView(ModelViewSet):
         send_mail(subject, message, from_email, [email, ])
 
     def perform_create(self, serializer):
-        email = serializer.validated_data.get('email')          
+        email = serializer.validated_data.get('email')
         # создаем пользователя без пароля
         user, created = User.objects.get_or_create(email=email)
         # создаем confirmation_code, он же - пароль для пользователя

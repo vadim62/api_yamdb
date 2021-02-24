@@ -17,8 +17,8 @@ class UsersViewSet(ModelViewSet):
     permission_classes = (
         IsAuthenticated,
         UsersPermissions,
-   )
-    pagination_class = PageNumberPagination  
+    )
+    pagination_class = PageNumberPagination
     filter_backends = (filters.SearchFilter,)
     search_fields = ('username',)
 
