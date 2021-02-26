@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 
-from rest_framework import exceptions, status
+from rest_framework import status
 from rest_framework.permissions import BasePermission
 from rest_framework.response import Response
 
@@ -14,10 +14,10 @@ class UsersPermissions(BasePermission):
             return True
         if (request.method == 'GET'
             and view.action == 'list'
-            and (request.user.is_user or request.user.is_moderator)):
+                and (request.user.is_user or request.user.is_moderator)):
             return False
         if (request.method == 'POST'
-            and (request.user.is_user or request.user.is_moderator)):
+                and (request.user.is_user or request.user.is_moderator)):
             return False
         return True
 
@@ -80,6 +80,6 @@ class TitlesPermissions(BasePermission):
         if request.method == 'GET':
             return True
         if request.method in ['POST', 'DELETE', 'PATCH'] and (
-            request.auth is not None and request.user.is_admin):
+                request.auth is not None and request.user.is_admin):
             return True
         return False

@@ -1,6 +1,6 @@
 import django_filters
 
-from api_yamdb.models import Title
+from .models import Title
 
 
 class TitlesFilter(django_filters.FilterSet):
