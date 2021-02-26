@@ -13,7 +13,7 @@ v1_router.register(
     RegisterUserView
 )
 v1_router.register(
-    r'users',
+    'users',
     UsersViewSet
 )
 v1_router.register(
