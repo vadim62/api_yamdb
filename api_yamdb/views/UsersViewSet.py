@@ -1,8 +1,10 @@
 from django.contrib.auth import get_user_model
-from django.shortcuts import get_object_or_404
+
 from rest_framework import filters
+from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from api_yamdb.permissions.permissions import UsersPermissions
@@ -18,15 +20,19 @@ class UsersViewSet(ModelViewSet):
         IsAuthenticated,
         UsersPermissions,
     )
-    pagination_class = PageNumberPagination
+    lookup_field = 'username'
+    pagination_class = PageNumberPagination  
     filter_backends = (filters.SearchFilter,)
     search_fields = ('username',)
-
-    def get_object(self):
-        username = self.kwargs.get('pk')
-        if username == 'me':
-            user = self.request.user
+  
+    @action(detail=False, methods=['get', 'patch'])
+    def me(self, request):
+        if request.method == 'GET':
+            serializer = self.get_serializer(request.user)
         else:
-            user = get_object_or_404(User, username=username)
-        self.kwargs['pk'] = user.pk
-        return super().get_object()
+            serializer = self.get_serializer(
+                instance=request.user, data=request.data, partial=True)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.data)

@@ -3,8 +3,48 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
 
-from api_yamdb.routers import v1_router
+from rest_framework.routers import DefaultRouter
+
 from api_yamdb.views import MyTokenObtainPairView, schema_view
+from api_yamdb.views import (CategoriesViewSet, CommentViewSet, GenresViewSet,
+                             MyTokenObtainPairView, RegisterUserView,
+                             ReviewViewSet, TitlesViewSet, UsersViewSet)
+
+
+v1_router = DefaultRouter()
+v1_router.register(
+    'auth/email',
+    RegisterUserView
+)
+v1_router.register(
+    'users',
+    UsersViewSet
+)
+v1_router.register(
+    'titles',
+    TitlesViewSet,
+    basename='titles',
+)
+v1_router.register(
+    'categories',
+    CategoriesViewSet,
+    basename='categories'
+)
+v1_router.register(
+    'genres',
+    GenresViewSet,
+    basename='genres'
+)
+v1_router.register(
+    r'titles/(?P<title_id>\d+)/reviews',
+    ReviewViewSet,
+    basename='Review'
+)
+v1_router.register(
+    r'titles/(?P<title_id>\d+)/reviews/(?P<review_id>\d+)/comments',
+    CommentViewSet,
+    basename='Comment'
+)
 
 urlpatterns = [
     path(
