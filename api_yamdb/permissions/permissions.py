@@ -55,7 +55,7 @@ class CommentPermissions(BasePermission):
         if request.method == 'GET':
             return True
         if request.user and request.user.is_authenticated:
-            if (request.user.is_user or request.user.is_moderator
+            if (request.user.is_admin or request.user.is_moderator
                     or obj.author == request.user):
                 return True
 
@@ -70,7 +70,7 @@ class ReviewPermissions(BasePermission):
         if request.method == 'GET':
             return True
         if request.user and request.user.is_authenticated:
-            if (request.user.is_user or request.user.is_moderator
+            if (request.user.is_admin or request.user.is_moderator
                     or obj.author == request.user):
                 return True
 
