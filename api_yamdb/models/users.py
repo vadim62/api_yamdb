@@ -28,6 +28,7 @@ class MyUser(AbstractUser):
         default=PermissionChoice.USER,
     )
     bio = models.TextField(
+        verbose_name='bio',
         blank=True,
         null=True
     )
@@ -60,4 +61,3 @@ class MyUser(AbstractUser):
         if self.role == 'admin' or self.is_staff is True:
             return True
         return False
-        
