@@ -4,7 +4,7 @@ from django.contrib.admin.sites import AlreadyRegistered
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
-from api_yamdb import models
+from api import models
 
 
 User = get_user_model()
@@ -13,7 +13,7 @@ User = get_user_model()
 class UserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'username', 'password')}),
-        ('Personal info', {'fields': ('first_name','last_name', 'bio')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'bio')}),
         ('Permissions', {'fields': ('role',)}),
     )
     list_display = ('email', 'username')
