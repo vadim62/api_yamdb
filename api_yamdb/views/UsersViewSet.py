@@ -1,5 +1,3 @@
-from api_yamdb.permissions.permissions import UsersPermissions
-from api_yamdb.serializers import UsersSerializer
 from django.contrib.auth import get_user_model
 
 from rest_framework import filters
@@ -8,6 +6,9 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+
+from api_yamdb.permissions.permissions import UsersPermissions
+from api_yamdb.serializers import UsersSerializer
 
 User = get_user_model()
 

@@ -1,11 +1,15 @@
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
+
 from rest_framework.routers import DefaultRouter
 
+from api_yamdb.views import MyTokenObtainPairView, schema_view
 from api_yamdb.views import (CategoriesViewSet, CommentViewSet, GenresViewSet,
                              MyTokenObtainPairView, RegisterUserView,
                              ReviewViewSet, TitlesViewSet, UsersViewSet)
+
 
 v1_router = DefaultRouter()
 v1_router.register(
@@ -42,7 +46,6 @@ v1_router.register(
     basename='Comment'
 )
 
-
 urlpatterns = [
     path(
         'auth/token/',
@@ -51,13 +54,28 @@ urlpatterns = [
     ),
     path(
         'admin/',
-        admin.site.urls),
+        admin.site.urls
+    ),
     path(
         'redoc/',
         TemplateView.as_view(template_name='redoc.html'),
         name='redoc'
     ),
 ]
+
 urlpatterns += [
     path('api/v1/', include(v1_router.urls)),
+]
+
+urlpatterns += [
+    url(
+        r'^swagger(?P<format>\.json|\.yaml)$',
+        schema_view.without_ui(cache_timeout=0),
+        name='schema-json'
+    ),
+    url(
+        r'^swagger/$',
+        schema_view.with_ui('swagger', cache_timeout=0),
+        name='schema-swagger-ui'
+    ),
 ]

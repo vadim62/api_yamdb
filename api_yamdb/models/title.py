@@ -12,12 +12,14 @@ class Title(models.Model):
         max_length=200,
         blank=False,
         null=False,
-        unique=True
+        unique=True,
+        verbose_name='Title name'
     )
     year = models.IntegerField(
         blank=True,
         null=True,
-        validators=[MaxValueValidator(dt.datetime.now().year + 1)]
+        validators=[MaxValueValidator(dt.datetime.now().year + 1)],
+        verbose_name='Year of production'
     )
     category = models.ForeignKey(
         Category,
@@ -25,15 +27,20 @@ class Title(models.Model):
         related_name='titles',
         null=True,
         blank=True,
+        verbose_name='Title category'
     )
     description = models.CharField(
         max_length=200,
         blank=True,
+        verbose_name='Title description'
     )
     genre = models.ManyToManyField(
         Genre,
         blank=True,
+        verbose_name='Title genres'
     )
 
     class Meta:
-        ordering = ['id']
+        ordering = ['id', ]
+        verbose_name = 'Title'
+        verbose_name_plural = 'Titles'

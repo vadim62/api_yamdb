@@ -6,3 +6,15 @@ from .review_serial import ReviewSerializer
 from .titles_serial import TitleReadSerializer, TitlesSerializer
 from .token_serial import MyTokenObtainPairSerializer
 from .users_serial import UsersSerializer
+
+__all__ = [
+    'CategoriesSerializer',
+    'CommentSerializer',
+    'GenresSerializer',
+    'RegisterSerializer',
+    'ReviewSerializer',
+    'TitleReadSerializer',
+    'TitlesSerializer',
+    'MyTokenObtainPairSerializer',
+    'UsersSerializer',
+]

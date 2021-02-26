@@ -18,4 +18,4 @@ class Genre(models.Model):
         return self.slug
 
     class Meta:
-        ordering = ['slug']
+        ordering = ['slug', ]
