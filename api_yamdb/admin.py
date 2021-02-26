@@ -8,15 +8,14 @@ User = get_user_model()
 
 
 class UserAdmin(UserAdmin):
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'username', 'password1', 'password2', ),
-        }),
+    fieldsets = (
+        (None, {'fields': ('email', 'username', 'password')}),
+        ('Personal info', {'fields': ('first_name','last_name', 'bio')}),
+        ('Permissions', {'fields': ('role',)}),
     )
     list_display = ('email', 'username')
-    list_filter = ('email', 'username')
     search_fields = ('email', 'username')
+    list_filter = ('email', 'username')
     ordering = ('email', 'username')
     empty_value_display = '-пусто-'
 
@@ -27,6 +26,6 @@ class TitlesAdmin(admin.ModelAdmin):
     list_filter = ('id',)
 
 
-admin.site.register(Title, TitlesAdmin)
 
 admin.site.register(User, UserAdmin)
+admin.site.register(Title, TitlesAdmin)
