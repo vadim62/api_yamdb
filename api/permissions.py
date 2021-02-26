@@ -7,79 +7,64 @@ from rest_framework.response import Response
 User = get_user_model()
 
 
-class UsersPermissions(BasePermission):
+from django.contrib.auth import get_user_model
 
-    def has_permission(self, request, view):
-        if request.user.is_admin:
+from rest_framework import exceptions, status
+from rest_framework.permissions import BasePermission
+from rest_framework.response import Response
+
+User = get_user_model()
+
+
+class IsAnonymous(BasePermission):
+    
+    def has_permission(self, request, view): 
+        if request.user.is_anonymous == True and request.method == 'GET':
             return True
-        if (request.method == 'GET'
-            and view.action == 'list'
-                and (request.user.is_user or request.user.is_moderator)):
-            return False
-        if (request.method == 'POST'
-                and (request.user.is_user or request.user.is_moderator)):
-            return False
-        return True
 
     def has_object_permission(self, request, view, obj):
-        if request.user.is_admin:
+        if request.user.is_anonymous == True and request.method == 'GET':
             return True
-        is_me = (
-            request.user.username == request.parser_context.get('kwargs').get(
-                'username')
-        )
-        if is_me and request.method in ['GET', 'PATCH']:
-            return True
-        return False
 
 
-class CategoriesGenresPermissions(BasePermission):
+class IsAuthenticatedOrAuthor(BasePermission):
+
     def has_permission(self, request, view):
-        if request.method == 'GET':
+        if (request.user.is_authenticated and
+            request.method in ['GET', 'POST', 'PATCH', 'DELETE']):
             return True
-        if request.method in ['POST', 'DELETE'] and (
-                request.auth is not None and request.user.is_admin):
+
+    def has_object_permission(self, request, view, obj):
+        is_author = obj.author == request.user
+        if is_author or request.user.is_admin or request.user.is_moderator:
             return True
-        if request.method == 'PATCH':
+
+class IsMe(BasePermission):
+
+    def has_permission(self, request, view):
+        if (request.user.is_authenticated and
+            view.action == 'me' and
+            request.method in ['GET', 'PATCH']):
+            return True
+        if (request.user.is_authenticated and
+            request.method == 'DELETE'):    
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
-        return False
-
-
-class CommentPermissions(BasePermission):
-    def has_permission(self, request, view):
-        return request.method == 'GET' or (
-            request.user
-            and request.user.is_authenticated)
 
     def has_object_permission(self, request, view, obj):
-        if request.method == 'GET':
+        if (request.user.is_authenticated and 
+            view.action == 'me' and
+            request.method in ['GET', 'PATCH']):
             return True
-        if request.user and request.user.is_authenticated:
-            if (request.user.is_admin or request.user.is_moderator
-                    or obj.author == request.user):
-                return True
+        
 
+class IsAdmin(BasePermission):
 
-class ReviewPermissions(BasePermission):
     def has_permission(self, request, view):
-        return request.method == 'GET' or (
-            request.user
-            and request.user.is_authenticated)
+        if (request.user.is_authenticated and request.user.is_admin and 
+            request.method in ['GET', 'POST', 'PATCH', 'DELETE']):
+            return True
 
     def has_object_permission(self, request, view, obj):
-        if request.method == 'GET':
+        if (request.user.is_authenticated and request.user.is_admin and
+            request.method in ['GET', 'POST', 'DELETE', 'PATCH']):
             return True
-        if request.user and request.user.is_authenticated:
-            if (request.user.is_admin or request.user.is_moderator
-                    or obj.author == request.user):
-                return True
-
-
-class TitlesPermissions(BasePermission):
-    def has_permission(self, request, view):
-        if request.method == 'GET':
-            return True
-        if request.method in ['POST', 'DELETE', 'PATCH'] and (
-                request.auth is not None and request.user.is_admin):
-            return True
-        return False
