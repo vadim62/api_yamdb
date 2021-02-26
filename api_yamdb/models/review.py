@@ -30,8 +30,10 @@ class Review(models.Model):
         auto_now_add=True
     )
 
-    class Meta:
-        unique_together = ['author', 'title']
+    constraints = [
+        models.UniqueConstraint(
+            fields=['author', 'title'], name='unique author_title')
+    ]
 
     def __str__(self):
         return f'"{self.text}"'
