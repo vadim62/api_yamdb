@@ -1,8 +1,11 @@
+from django.apps import apps
 from django.contrib import admin
+from django.contrib.admin.sites import AlreadyRegistered
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
-from .models import Title
+from api_yamdb import models
+
 
 User = get_user_model()
 
@@ -26,6 +29,9 @@ class TitlesAdmin(admin.ModelAdmin):
     list_filter = ('id',)
 
 
-
-admin.site.register(User, UserAdmin)
-admin.site.register(Title, TitlesAdmin)
+models = apps.get_models()
+for model in models:
+    try:
+        admin.site.register(model)
+    except AlreadyRegistered:
+        pass
