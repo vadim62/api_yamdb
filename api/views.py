@@ -13,7 +13,7 @@ from rest_framework.decorators import action
 from rest_framework.mixins import (CreateModelMixin, DestroyModelMixin,
                                    ListModelMixin)
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import AllowAny, IsAuthenticated, SAFE_METHODS
+from rest_framework.permissions import AllowAny, SAFE_METHODS
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -22,7 +22,7 @@ from rest_framework_simplejwt.views import TokenViewBase
 from .filters import TitlesFilter
 from .models import Category, Genre, Review, Title
 from .pagination import YamPagination
-from .permissions import IsAnonymous, IsAuthenticatedOrAuthor, IsMe, IsAdmin
+from .permissions import IsAdmin, IsAnonymous, IsAuthenticatedOrAuthor, IsMe
 from .serializers import (CategorieSerializer, CommentSerializer,
                           GenreSerializer, MyTokenObtainPairSerializer,
                           RegisterSerializer, ReviewSerializer,
@@ -38,7 +38,7 @@ class MyTokenObtainPairView(TokenViewBase):
 class UsersViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsMe|IsAdmin]
+    permission_classes = [IsMe | IsAdmin]
     lookup_field = 'username'
     pagination_class = PageNumberPagination
     filter_backends = (filters.SearchFilter,)
@@ -89,7 +89,7 @@ class CategoryViewSet(
     DestroyModelMixin
 ):
     pagination_class = YamPagination
-    permission_classes = [IsAnonymous|IsAdmin]
+    permission_classes = [IsAnonymous | IsAdmin]
     queryset = Category.objects.all()
     serializer_class = CategorieSerializer
     filterset_fields = ['name', ]
@@ -109,7 +109,7 @@ class GenreViewSet(
     DestroyModelMixin
 ):
     pagination_class = YamPagination
-    permission_classes = [IsAnonymous|IsAdmin]
+    permission_classes = [IsAnonymous | IsAdmin]
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
     filter_backends = [filters.SearchFilter]
@@ -125,7 +125,7 @@ class TitleViewSet(viewsets.ModelViewSet):
     queryset = Title.objects.annotate(
         rating=Avg('reviews__score')
     ).order_by('id')
-    permission_classes = [IsAnonymous|IsAdmin]
+    permission_classes = [IsAnonymous | IsAdmin]
     pagination_class = YamPagination
     serializer_class = TitleSerializer
     filter_backends = (DjangoFilterBackend,)
@@ -140,7 +140,7 @@ class TitleViewSet(viewsets.ModelViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     pagination_class = YamPagination
-    permission_classes = [IsAnonymous|IsAuthenticatedOrAuthor]
+    permission_classes = [IsAnonymous | IsAuthenticatedOrAuthor]
 
     def get_queryset(self):
         title = get_object_or_404(Title, pk=self.kwargs.get('title_id'))
@@ -154,7 +154,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     pagination_class = YamPagination
-    permission_classes = [IsAnonymous|IsAuthenticatedOrAuthor]
+    permission_classes = [IsAnonymous | IsAuthenticatedOrAuthor]
 
     def get_queryset(self):
         review = get_object_or_404(Review, pk=self.kwargs.get('review_id'))
