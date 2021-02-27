@@ -46,21 +46,21 @@ class MyUser(AbstractUser):
     @property
     def is_user(self):
         'Returns True if user has role user.'
-        if self.role == 'user':
+        if self.role == self.PermissionChoice.USER:
             return True
         return False
 
     @property
     def is_moderator(self):
         'Returns True if user has role moderator.'
-        if self.role == 'moderator':
+        if self.role == self.PermissionChoice.MODERATOR:
             return True
         return False
 
     @property
     def is_admin(self):
         'Returns True if user has role admin.'
-        if self.role == 'admin' or self.is_staff is True:
+        if self.role == self.PermissionChoice.ADMIN or self.is_staff is True:
             return True
         return False
 
