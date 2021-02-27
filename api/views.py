@@ -13,7 +13,7 @@ from rest_framework.decorators import action
 from rest_framework.mixins import (CreateModelMixin, DestroyModelMixin,
                                    ListModelMixin)
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import AllowAny, IsAuthenticated, SAFE_METHODS
+from rest_framework.permissions import AllowAny, SAFE_METHODS
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -22,13 +22,21 @@ from rest_framework_simplejwt.views import TokenViewBase
 from .filters import TitlesFilter
 from .models import Category, Genre, Review, Title
 from .pagination import YamPagination
-from .permissions import IsAnonymous, IsAuthenticatedOrAuthor, IsMe, IsAdmin
+from .permissions import IsAdmin, IsAnonymous, IsAuthenticatedOrAuthor, IsMe
 from .serializers import (CategorieSerializer, CommentSerializer,
                           GenreSerializer, MyTokenObtainPairSerializer,
                           RegisterSerializer, ReviewSerializer,
                           TitleReadSerializer, TitleSerializer, UserSerializer)
 
 User = get_user_model()
+
+
+class CLDMixIn(
+        viewsets.GenericViewSet,
+        CreateModelMixin,
+        ListModelMixin,
+        DestroyModelMixin):
+    pass
 
 
 class MyTokenObtainPairView(TokenViewBase):
@@ -82,12 +90,7 @@ class RegisterUserView(ModelViewSet):
         self.send_confirmation_code(email, confirmation_code)
 
 
-class CategoryViewSet(
-    viewsets.GenericViewSet,
-    CreateModelMixin,
-    ListModelMixin,
-    DestroyModelMixin
-):
+class CategoryViewSet(CLDMixIn):
     pagination_class = YamPagination
     permission_classes = [IsAnonymous | IsAdmin]
     queryset = Category.objects.all()
@@ -102,12 +105,7 @@ class CategoryViewSet(
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class GenreViewSet(
-    viewsets.GenericViewSet,
-    CreateModelMixin,
-    ListModelMixin,
-    DestroyModelMixin
-):
+class GenreViewSet(CLDMixIn):
     pagination_class = YamPagination
     permission_classes = [IsAnonymous | IsAdmin]
     queryset = Genre.objects.all()
@@ -124,7 +122,9 @@ class GenreViewSet(
 class TitleViewSet(viewsets.ModelViewSet):
     queryset = Title.objects.annotate(
         rating=Avg('reviews__score')
-    )
+    ).order_by('id')
+    # если убирать от сюда сортировку, то пишет ошибку:
+    # QuerySet won't use Meta.ordering in Django 3.1
     permission_classes = [IsAnonymous | IsAdmin]
     pagination_class = YamPagination
     serializer_class = TitleSerializer
