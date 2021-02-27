@@ -124,7 +124,7 @@ class GenreViewSet(
 class TitleViewSet(viewsets.ModelViewSet):
     queryset = Title.objects.annotate(
         rating=Avg('reviews__score')
-    ).order_by('id')
+    )
     permission_classes = [IsAnonymous | IsAdmin]
     pagination_class = YamPagination
     serializer_class = TitleSerializer
@@ -144,7 +144,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         title = get_object_or_404(Title, pk=self.kwargs.get('title_id'))
-        return title.reviews.all().order_by('id')
+        return title.reviews.all()
 
     def perform_create(self, serializer):
         title = get_object_or_404(Title, pk=self.kwargs.get('title_id'))
@@ -160,7 +160,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         title_id = self.kwargs.get('title_id')
         review_id = self.kwargs.get('review_id')
         review = get_object_or_404(Review, pk=review_id, title__id=title_id)
-        return review.comments.all().order_by('id')
+        return review.comments.all()
 
     def perform_create(self, serializer):
         title_id = self.kwargs.get('title_id')

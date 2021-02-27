@@ -211,6 +211,7 @@ class Review(models.Model):
             models.UniqueConstraint(
                 fields=['author', 'title'], name='unique author_title')
         ]
+        ordering = ['id', ]
         verbose_name = 'Review'
         verbose_name_plural = 'Reviews'
 
@@ -244,5 +245,6 @@ class Comment(models.Model):
         return f'"{self.text}"'
 
     class Meta:
+        ordering = ['id', ]
         verbose_name = 'Comment'
         verbose_name_plural = 'Comments'
