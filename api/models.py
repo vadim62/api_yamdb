@@ -4,11 +4,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.template.defaultfilters import slugify
 
 
 class MyUser(AbstractUser):
-
     class PermissionChoice(models.TextChoices):
         USER = 'user'
         MODERATOR = 'moderator'
@@ -73,6 +71,7 @@ User = get_user_model()
 class Genre(models.Model):
     name = models.CharField(
         max_length=50,
+        verbose_name='Genre name'
     )
     slug = models.SlugField(
         max_length=50,
@@ -80,40 +79,17 @@ class Genre(models.Model):
         null=False,
         unique=True,
         db_index=True,
-        primary_key=True
+        primary_key=True,
+        verbose_name='Genre slug name'
     )
 
     def __str__(self):
         return self.slug
 
     class Meta:
-        ordering = ['slug', ]
-
-
-class Genres(models.Model):
-    name = models.CharField(
-        max_length=50,
-        unique=True,
-        verbose_name='Genre name'
-    )
-    slug = models.SlugField(
-        max_length=50,
-        blank=True,
-        null=False,
-        unique=True,
-        verbose_name='Genre slug name'
-    )
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Genres, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return f'"{self.name}"'
-
-    class Meta:
         verbose_name = 'Genre'
         verbose_name_plural = 'Genres'
+        ordering = ['slug', ]
 
 
 class Category(models.Model):
