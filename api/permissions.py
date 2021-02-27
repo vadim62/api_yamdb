@@ -4,7 +4,6 @@ from rest_framework import status
 from rest_framework.permissions import BasePermission
 from rest_framework.response import Response
 
-
 User = get_user_model()
 
 
@@ -36,7 +35,7 @@ class IsMe(BasePermission):
 
     def has_permission(self, request, view):
         if (request.user.is_authenticated
-            and view.action == 'me'
+                and view.action == 'me'
                 and request.method in ['GET', 'PATCH']):
             return True
         if (request.user.is_authenticated
@@ -45,7 +44,7 @@ class IsMe(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         if (request.user.is_authenticated
-            and view.action == 'me'
+                and view.action == 'me'
                 and request.method in ['GET', 'PATCH']):
             return True
 

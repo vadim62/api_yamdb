@@ -1,13 +1,9 @@
-from api_yamdb import settings
-
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404
-
 from django_filters.rest_framework import DjangoFilterBackend
-
 from rest_framework import filters, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.mixins import (CreateModelMixin, DestroyModelMixin,
@@ -16,9 +12,9 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny, SAFE_METHODS
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-
 from rest_framework_simplejwt.views import TokenViewBase
 
+from api_yamdb import settings
 from .filters import TitlesFilter
 from .models import Category, Genre, Review, Title
 from .pagination import YamPagination
@@ -32,10 +28,11 @@ User = get_user_model()
 
 
 class CLDMixIn(
-        viewsets.GenericViewSet,
-        CreateModelMixin,
-        ListModelMixin,
-        DestroyModelMixin):
+    viewsets.GenericViewSet,
+    CreateModelMixin,
+    ListModelMixin,
+    DestroyModelMixin
+):
     pass
 
 

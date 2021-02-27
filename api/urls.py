@@ -2,49 +2,9 @@ from django.conf.urls import url
 from django.urls import include, path
 from django.views.generic import TemplateView
 
-from rest_framework.routers import DefaultRouter
-
+from .routers import v1_router
 from .swagger import schema_view
-from .views import (CategoryViewSet, CommentViewSet, GenreViewSet,
-                    MyTokenObtainPairView,
-                    RegisterUserView,
-                    ReviewViewSet, TitleViewSet, UsersViewSet)
-
-
-v1_router = DefaultRouter()
-v1_router.register(
-    'auth/email',
-    RegisterUserView
-)
-v1_router.register(
-    'users',
-    UsersViewSet
-)
-v1_router.register(
-    'titles',
-    TitleViewSet,
-    basename='titles',
-)
-v1_router.register(
-    'categories',
-    CategoryViewSet,
-    basename='categories'
-)
-v1_router.register(
-    'genres',
-    GenreViewSet,
-    basename='genres'
-)
-v1_router.register(
-    r'titles/(?P<title_id>\d+)/reviews',
-    ReviewViewSet,
-    basename='Review'
-)
-v1_router.register(
-    r'titles/(?P<title_id>\d+)/reviews/(?P<review_id>\d+)/comments',
-    CommentViewSet,
-    basename='Comment'
-)
+from .views import MyTokenObtainPairView
 
 urlpatterns = [
     path(
@@ -59,7 +19,6 @@ urlpatterns = [
     ),
     path('v1/', include(v1_router.urls)),
 ]
-
 
 urlpatterns += [
     url(
