@@ -31,6 +31,14 @@ from .serializers import (CategorieSerializer, CommentSerializer,
 User = get_user_model()
 
 
+class CLDMixIn(
+        viewsets.GenericViewSet,
+        CreateModelMixin,
+        ListModelMixin,
+        DestroyModelMixin):
+    pass
+
+
 class MyTokenObtainPairView(TokenViewBase):
     serializer_class = MyTokenObtainPairSerializer
 
@@ -82,12 +90,7 @@ class RegisterUserView(ModelViewSet):
         self.send_confirmation_code(email, confirmation_code)
 
 
-class CategoryViewSet(
-    viewsets.GenericViewSet,
-    CreateModelMixin,
-    ListModelMixin,
-    DestroyModelMixin
-):
+class CategoryViewSet(CLDMixIn):
     pagination_class = YamPagination
     permission_classes = [IsAnonymous | IsAdmin]
     queryset = Category.objects.all()
@@ -102,12 +105,7 @@ class CategoryViewSet(
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class GenreViewSet(
-    viewsets.GenericViewSet,
-    CreateModelMixin,
-    ListModelMixin,
-    DestroyModelMixin
-):
+class GenreViewSet(CLDMixIn):
     pagination_class = YamPagination
     permission_classes = [IsAnonymous | IsAdmin]
     queryset = Genre.objects.all()
