@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
+
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
+
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from .models import Category, Comment, Genre, Review, Title
